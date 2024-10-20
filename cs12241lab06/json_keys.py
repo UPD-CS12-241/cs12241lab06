@@ -1,0 +1,5 @@
+MSG_TYPE = 'message-type'
+CHATS = 'chats'
+SRC = 'src'
+DST = 'dst'
+MSG = 'msg'
