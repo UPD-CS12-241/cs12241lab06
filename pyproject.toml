@@ -1,12 +1,9 @@
 [tool.poetry]
 name = "cs12241lab06"
-version = "0.1.4"
+version = "0.1.5"
 description = ""
 authors = []
 readme = "README.md"
-include = [
-  {path = "cs12241lab06/py.typed"},
-]
 
 [tool.poetry.dependencies]
 python = "^3.11"
