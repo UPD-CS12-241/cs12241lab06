@@ -32,7 +32,7 @@ class Session:
     def __init__(self, username: str, endpoint: str, websocket: WebSocketClientProtocol):
         self.username = username
         self.endpoint = endpoint
-        self.chats: list[ChatMessage] | None = None
+        self.chats: list[ChatMessage] = []
         self._websocket = websocket
 
     def send_group_message(self, msg: str):
