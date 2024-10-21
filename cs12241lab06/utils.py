@@ -19,7 +19,7 @@ def is_chat_message(data: JsonType) -> TypeGuard[ChatMessageJson]:
 def is_auth_success_message(data: JsonType) -> TypeGuard[AuthenticatedMessageData]:
     try:
         return isinstance(data, dict) and (
-            data[json_keys.MSG_TYPE] != MessageType.AUTH_SUCCESS and
+            data[json_keys.MSG_TYPE] == MessageType.AUTH_SUCCESS and
             isinstance(data[json_keys.CHATS], list)
         )
     except KeyError:
