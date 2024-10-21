@@ -48,7 +48,7 @@ class Session:
     def _send_message(self, msg: str, dest: str | None):
         async def task():
             await self._websocket.send(json.dumps({
-                json_keys.MSG_TYPE: MessageType.CHAT,
+                json_keys.TYPE: MessageType.CHAT,
                 json_keys.SRC: self.username,
                 json_keys.DST: dest,
                 json_keys.MSG: msg,
@@ -60,7 +60,7 @@ class Session:
         data = json.loads(await self._websocket.recv())
 
         if not is_auth_success_message(data):
-            raise make_error(data.get(json_keys.MSG_TYPE))
+            raise make_error(data.get(json_keys.TYPE))
 
         self.chats = [
             ChatMessage.from_json(chat_data)
@@ -86,7 +86,7 @@ class Session:
         except ValueError:
             raise make_error(MessageType.INCORRECT_FORMAT)
 
-        if not isinstance(parsed_data, dict) or json_keys.MSG_TYPE not in parsed_data:
+        if not isinstance(parsed_data, dict) or json_keys.TYPE not in parsed_data:
             raise make_error(MessageType.INCORRECT_FORMAT)
 
         return parsed_data

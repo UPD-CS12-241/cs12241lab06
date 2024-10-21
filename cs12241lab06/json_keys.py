@@ -1,4 +1,4 @@
-MSG_TYPE = 'message-type'
+TYPE = 'type'
 CHATS = 'chats'
 SRC = 'src'
 DST = 'dst'

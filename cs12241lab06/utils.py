@@ -7,7 +7,7 @@ from .project_types import JsonType, ChatMessageJson, MessageType, Authenticated
 def is_chat_message(data: JsonType) -> TypeGuard[ChatMessageJson]:
     try:
         return isinstance(data, dict) and (
-            data[json_keys.MSG_TYPE] == MessageType.CHAT and
+            data[json_keys.TYPE] == MessageType.CHAT and
             isinstance(data[json_keys.SRC], str) and
             isinstance(data[json_keys.MSG], str) and (
                 isinstance(data[json_keys.DST], str) or
@@ -21,7 +21,7 @@ def is_chat_message(data: JsonType) -> TypeGuard[ChatMessageJson]:
 def is_auth_success_message(data: JsonType) -> TypeGuard[AuthenticatedMessageData]:
     try:
         return isinstance(data, dict) and (
-            data[json_keys.MSG_TYPE] == MessageType.AUTH_SUCCESS and
+            data[json_keys.TYPE] == MessageType.AUTH_SUCCESS and
             isinstance(data[json_keys.CHATS], list)
         )
     except KeyError:
@@ -37,6 +37,6 @@ def make_error(msg_type: str | None):
         case MessageType.INVALID_CREDENTIALS:
             return RuntimeError('Invalid credentials')
         case None:
-            return RuntimeError(f"{json_keys.MSG_TYPE} key not found in JSON")
+            return RuntimeError(f"{json_keys.TYPE} key not found in JSON")
         case _:
             return RuntimeError(f"Unknown message type: {msg_type}")
