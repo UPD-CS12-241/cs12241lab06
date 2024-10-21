@@ -26,7 +26,7 @@ def is_auth_success_message(data: JsonType) -> TypeGuard[AuthenticatedMessageDat
         return False
 
 
-def make_error(msg_type: str):
+def make_error(msg_type: str | None):
     match msg_type:
         case MessageType.INCORRECT_FORMAT:
             return RuntimeError('Incorrect format')
@@ -34,5 +34,7 @@ def make_error(msg_type: str):
             return RuntimeError('Missing JSON keys')
         case MessageType.INVALID_CREDENTIALS:
             return RuntimeError('Invalid credentials')
+        case None:
+            return RuntimeError(f"{json_keys.MSG_TYPE} key not found in JSON")
         case _:
             return RuntimeError(f"Unknown message type: {msg_type}")

@@ -60,7 +60,7 @@ class Session:
         data = json.loads(await self._websocket.recv())
 
         if not is_auth_success_message(data):
-            raise make_error(data[json_keys.MSG_TYPE])
+            raise make_error(data.get(json_keys.MSG_TYPE))
 
         self.chats = [
             ChatMessage.from_json(chat_data)
