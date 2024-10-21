@@ -9,8 +9,10 @@ def is_chat_message(data: JsonType) -> TypeGuard[ChatMessageJson]:
         return isinstance(data, dict) and (
             data[json_keys.MSG_TYPE] == MessageType.CHAT and
             isinstance(data[json_keys.SRC], str) and
-            isinstance(data[json_keys.DST], str) and
-            isinstance(data[json_keys.MSG], str)
+            isinstance(data[json_keys.MSG], str) and (
+                isinstance(data[json_keys.DST], str) or
+                data[json_keys.DST] is None
+            )
         )
     except KeyError:
         return False
